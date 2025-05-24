@@ -121,7 +121,7 @@ const createApples = (e: MouseEvent) => {
   margin-left: -40px;
   margin-top: -40px;
   border-radius: 50%;
-  border: 5px solid rgb(243, 228, 210);
+  border: 3px solid rgb(243, 228, 210);
   animation: shockwave 0.5s ease-out forwards;
   pointer-events: none;
 }

@@ -5,6 +5,7 @@ import BirthdayStory from './components/BirthdayStory.vue'
 import BirthdayDialog from './components/BirthdayDialog.vue'
 import LuckyApple from './components/LuckyApple.vue'
 import Footer from './components/Footer.vue'
+import ClickApples from './components/ClickApples.vue'
 
 const imagePaths = [
   '/assets/img/01.jpeg',
@@ -18,6 +19,7 @@ const imagePaths = [
 </script>
 
 <template>
+  <ClickApples />
   <div class="app">
     <Carousel :image-list="imagePaths" :interval-ms="3000"/>
     <BirthdayHint name="夏以晝" avatarUrl="/assets/img/avatar.png" link="/birthday"/>
@@ -29,7 +31,9 @@ const imagePaths = [
         '『我聽見你說 「現身吧！夏以晝」了』',
       ]" 
       storyImage="/assets/img/avatar.png" 
-      voiceUrl="/assets/audio/birthday_message.mp3" />
+      voiceUrl="/assets/audio/birthday_message.mp3"
+      videoUrl="/assets/video/birthday_video.MP4"
+      />
       <LuckyApple/>
       <BirthdayDialog
       :lines="[
