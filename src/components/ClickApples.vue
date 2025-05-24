@@ -31,29 +31,43 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import appleImg from '@/assets/img/apple.png'
 
-const apples = ref([])
-const flashes = ref([])
-const container = ref(null)
+type Apple = {
+  id: number
+  x: number
+  y: number
+  size: number
+  rotation: number
+  delay: number
+}
+
+type Flash = {
+  id: number
+  x: number
+  y: number
+}
+
+const apples = ref<Apple[]>([])
+const flashes = ref<Flash[]>([])
+const container = ref<HTMLElement | null>(null)
 
 let appleId = 0
 let flashId = 0
 
-const createApples = (e) => {
+const createApples = (e: MouseEvent) => {
+  if (!container.value) return
   const rect = container.value.getBoundingClientRect()
   const baseX = e.clientX - rect.left
   const baseY = e.clientY - rect.top
 
-  // 👇 加入閃光特效
   const id = flashId++
   flashes.value.push({ id, x: baseX, y: baseY })
+
   setTimeout(() => {
     const i = flashes.value.findIndex((f) => f.id === id)
     if (i !== -1) flashes.value.splice(i, 1)
   }, 500)
 
-  // 👇 蘋果拋出效果
   const count = 3 + Math.floor(Math.random() * 3)
   for (let i = 0; i < count; i++) {
     const offsetX = (Math.random() - 0.5) * 100
@@ -79,6 +93,7 @@ const createApples = (e) => {
   }
 }
 </script>
+
 
 <style scoped lang="scss">
 .apple-layer {

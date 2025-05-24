@@ -14,23 +14,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
-const props = defineProps({
-  imageList: {
-    type: Array,
-    required: true
-  },
-  intervalMs: {
-    type: Number,
-    default: 3000
-  }
-})
+const props = defineProps<{
+  imageList: string[],
+  intervalMs?: number
+}>()
 
-const images = ref([...props.imageList]) // 使用者傳入的圖
+const images = ref<string[]>([...props.imageList]) // 使用者傳入的圖
 const offset = ref(0)
 const isTransitioning = ref(true)
-let interval = null
+let interval: ReturnType<typeof setInterval> | undefined
+
 
 const moveLeft = async () => {
   isTransitioning.value = true
@@ -41,7 +36,9 @@ const moveLeft = async () => {
       isTransitioning.value = false
       offset.value = 0
       const first = images.value.shift()
-      images.value.push(first)
+      if (first !== undefined) {
+        images.value.push(first)
+      }
       await nextTick()
     }, 500) // 時間應和 CSS transition 時間一致
   }
