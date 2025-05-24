@@ -30,8 +30,8 @@ const goToBirthdayPage = () => {
   bottom: 20px;
   right: 20px;
   background: $background-color;
-  border: 2px solid $sunset;
-  box-shadow: 0 0 10px rgba($sunset, 0.4);
+  border: 2px solid $sunset-color;
+  box-shadow: 0 0 10px rgba($sunset-color, 0.4);
   border-radius: 1rem;
   padding: 0.8rem 1rem;
   display: flex;
@@ -51,7 +51,7 @@ const goToBirthdayPage = () => {
     height: 48px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 0 5px $navy;
+    box-shadow: 0 0 5px $navy-color;
     border: 2px solid white;
   }
 
@@ -59,11 +59,11 @@ const goToBirthdayPage = () => {
     p {
       margin: 0;
       font-weight: 600;
-      color: $navy;
+      color: $navy-color;
     }
 
     button {
-      background: $sunset;
+      background: $sunset-color;
       border: none;
       color: white;
       border-radius: 999px;
@@ -73,7 +73,7 @@ const goToBirthdayPage = () => {
       transition: background-color 0.2s;
 
       &:hover {
-        background-color: darken($sunset, 8%);
+        background-color: darken($sunset-color, 8%);
       }
     }
   }
