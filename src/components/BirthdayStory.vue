@@ -46,17 +46,14 @@ const props = defineProps({
 
 .birthday-story {
   padding: 2rem 1rem;
-  background: url('../assets/img/paper.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  box-shadow: 0 0 10px rgba(255, 215, 150, 0.3);
-  // max-width: 720px;
   position: relative;
 
   h2 {
     font-size: 36px;
-    color: #444545;
+    color: $background-color;
     margin-bottom: 1rem;
     text-align: center;
   }
@@ -65,7 +62,7 @@ const props = defineProps({
     border-radius: 1rem;
     padding: 1.2rem;
     font-size: 24px;
-    color: #444545;
+    color: #f5f5f5;
     line-height: 1.6;
     text-align: center;
 

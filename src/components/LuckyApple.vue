@@ -1,7 +1,8 @@
 <template>
   <div class="apple-layer" ref="container">
     <div class="title-container">
-      <p class="apple-title">幸運蘋果吃一口</p>
+      <p class="apple-title">哥哥蘋果咬一口</p>
+      <p class="apple-title">吃掉蘋果，獲得哥哥語錄🍎</p>
     </div>
 
     <!-- 幸運蘋果 -->
@@ -43,13 +44,15 @@ const fortuneMessage = ref('')
 const eatStage = ref(0)
 
 const fortuneTexts = [
-  '今天是你幸運的一天！',
-  '好運即將降臨！',
-  '有人正在默默喜歡你 ',
-  '夢想的事情快要實現了！',
-  '小確幸正在靠近中 ',
-  '你的努力很快就會被看見 ',
-  '今天你將成為歐皇！'
+  '汪！',
+  '你第一次拉住我的手的那一天我就已經跑不掉了，再讓我保護你一回。',
+  '你有沒有想過，我從來都不是你的哥哥。（嚼嚼嚼）',
+  '所有朝你打來的風雨都不該出現在你面前。',
+  '既然長大了，那哥哥這次就不幫你兜底了。 ',
+  '你願意給的就是我想要的，你想得到的就是我願意付出的。 ',
+  '如果每一個問題都通向遠離你的結局，那就用一輩子的時間來回答。',
+  '我不會交女朋友。有你和奶奶就足夠了，我沒有多餘的心力去在意別人。所以不用擔心，我不會的。',
+  '說好了...生與死都...不再分開',
 ]
 
 const nextEatStage = () => {
@@ -73,8 +76,6 @@ const resetFortune = () => {
   position: relative;
   width: 100%;
   height: 30vh;
-//   background: #fff5f5;
-    background: url('@/assets/img/paper.jpg') no-repeat center center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,16 +88,16 @@ const resetFortune = () => {
 }
 
 .apple-title {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: bold;
-  color: $primary-color;
+  text-align: center;
+  color: #f5f5f5;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 0;
 }
 
 .initial-apple {
   width: 100px;
-//   height: 100px;
   cursor: pointer;
   animation: appleBounce 1s ease-in-out infinite alternate;
 }
@@ -113,7 +114,7 @@ const resetFortune = () => {
   text-align: center;
   animation: fadeIn 0.3s ease-out;
   z-index: 10000;
-  width: 300px;
+  width: 400px;
 }
 
 .fortune-message {

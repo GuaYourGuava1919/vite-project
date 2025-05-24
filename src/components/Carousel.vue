@@ -7,7 +7,7 @@
     >
       <div class="carousel-slide" v-for="(img, i) in images" :key="i">
         <img :src="img" :alt="`Slide ${i + 1}`" />
-        <p>123</p>
+        <!-- <p>123</p> -->
       </div>
     </div>
   </div>
