@@ -24,11 +24,6 @@ const goToBirthdayPage = () => {
 </script>
 
 <style scoped lang="scss">
-// 色票來自你提供的組合
-$navy: #003285;
-$sky: #2A629A;
-$sunset: #FF7F3E;
-$yellow: #FFDA78;
 
 .birthday-hint {
   position: fixed;

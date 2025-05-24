@@ -12,19 +12,21 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
-const props = defineProps({
-  lines: Array,
-  font: {
-    type: String,
-    default: '"Zhi Mang Xing", cursive'
+const props = withDefaults(
+  defineProps<{
+    lines?: string[]
+  }>(),
+  {
+    lines: () => []
   }
-})
+)
+
 
 let currentIndex = ref(0)
 let displayedText = ref('')
 let isTyping = ref(false)
 
-const typeLine = async (line) => {
+const typeLine = async (line:string) => {
   displayedText.value = ''
   isTyping.value = true
   for (let i = 0; i < line.length; i++) {

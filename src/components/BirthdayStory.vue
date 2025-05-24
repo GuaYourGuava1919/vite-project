@@ -19,12 +19,12 @@
 
 <script setup lang="ts">
 import ClickApples from '@/components/ClickApples.vue'
-const props = defineProps({
-  name: String,
-  storyLines: Array,
-  storyImage: String,
-  voiceUrl: String
-})
+const { name, storyLines, storyImage, voiceUrl } = defineProps<{
+  name: string
+  storyLines: string[]
+  storyImage?: string
+  voiceUrl?: string
+}>()
 </script>
 
 <style scoped lang="scss">
