@@ -3,7 +3,7 @@
     <div class="dialog-box" @click="nextLine">
       <p class="dialog-text">{{ displayedText }}</p>
       <button class="next-button" v-if="!isTyping">
-        <img src="@/assets/img/plane.png" alt="Next" />
+        <img src="/assets/img/plane.png" alt="Next" />
       </button>
     </div>
   </div>

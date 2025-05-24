@@ -35,9 +35,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import appleImgWhole from '@/assets/img/apple.png'
-import appleImgHalf from '@/assets/img/apple_half.png'
-import appleImgEaten from '@/assets/img/apple_eaten.png'
+import appleImgWhole from '/assets/img/apple.png'
+import appleImgHalf from '/assets/img/apple_half.png'
+import appleImgEaten from '/assets/img/apple_eaten.png'
 
 const showFortune = ref(false)
 const fortuneMessage = ref('')
