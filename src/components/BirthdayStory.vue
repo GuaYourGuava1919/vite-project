@@ -17,7 +17,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ClickApples from '@/components/ClickApples.vue'
 const props = defineProps({
   name: String,

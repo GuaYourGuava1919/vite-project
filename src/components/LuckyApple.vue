@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import appleImgWhole from '@/assets/img/apple.png'
 import appleImgHalf from '@/assets/img/apple_half.png'
