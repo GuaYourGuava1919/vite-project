@@ -29,7 +29,7 @@ const goToBirthdayPage = () => {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: $yellow;
+  background: $background-color;
   border: 2px solid $sunset;
   box-shadow: 0 0 10px rgba($sunset, 0.4);
   border-radius: 1rem;
