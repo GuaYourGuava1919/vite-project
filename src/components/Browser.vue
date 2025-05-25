@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { doc, getDoc, updateDoc, increment, setDoc } from 'firebase/firestore'
+import { doc, getDoc, increment, setDoc } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 
 const viewCount = ref<number | null>(null)
