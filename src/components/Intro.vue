@@ -45,7 +45,7 @@ const isTyping = ref(false)
 function typeLine(text: string) {
   typedText.value = ''
   isTyping.value = true
-  let i = 0
+//   let i = 0
 
   const tagRegex = /<[^>]+>/g
   const segments: { text: string; isTag: boolean }[] = []
