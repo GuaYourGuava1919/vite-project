@@ -1,6 +1,6 @@
 <template>
   <div class="gacha-container">
-    <h2>遊戲抽不到沒關係，來這裡抽XD</h2>
+    <h2>遊戲抽不到沒關係，來這裡抽XD<br/>（記得開聲音，有驚喜！）</h2>
     <img class="corner-deco" src="/assets/img/oni05.gif" alt="裝飾圖" />
 
     <div

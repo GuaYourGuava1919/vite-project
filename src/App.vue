@@ -4,11 +4,10 @@ import Header from './components/Header.vue'
 
 import Carousel from './components/Carousel.vue'
 import BirthdayHint from './components/BirthdayHint.vue'
-import BirthdayStory from './components/BirthdayStory.vue'
 import LuckyApple from './components/LuckyApple.vue'
 import ClickApples from './components/ClickApples.vue'
-import GetCard from './components/GetCard.vue'
 import GetCard_modified from './components/GetCard_modified.vue'
+import Intro from './components/Intro.vue'
 
 const imagePaths = [
   '/assets/img/01.jpeg',
@@ -31,8 +30,10 @@ const imagePaths = [
     <Carousel :image-list="imagePaths" :interval-ms="3000"/>
     <!-- 簽名區 -->
     <BirthdayHint name="夏以晝" avatarUrl="/assets/img/avatar.png" link="/birthday"/>
+    <!-- 介紹 -->
+    <Intro/>
     <!-- 故事卡 -->
-    <BirthdayStory 
+    <!-- <BirthdayStory 
       name="夏以晝" 
       :storyLines="[
         '『大概是因為... 追隨溫暖是本能，我也不例外』',
@@ -41,7 +42,7 @@ const imagePaths = [
       storyImage="/assets/img/avatar.png" 
       voiceUrl="/assets/audio/birthday_message.mp3"
       videoUrl="/assets/video/birthday_video.MP4"
-      />
+      /> -->
     <!-- 幸運蘋果 -->
     <LuckyApple/>
     <!-- 手寫信 -->
