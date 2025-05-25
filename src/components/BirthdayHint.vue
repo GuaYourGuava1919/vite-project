@@ -1,14 +1,19 @@
 <template>
   <div class="birthday-hint" @click="goToBirthdayPage">
-    <!-- <img class="avatar" :src="avatarUrl" alt="角色頭像" /> -->
     <div class="text">
-      <p>留下你對<strong>{{ name }}</strong> 的生日生日祝福吧！</p>
-      <button>馬上祝福</button>
+      <p>留下你對<strong>{{ name }}</strong> 的生日祝福吧！</p>
+      <button @click.stop="showDialog = true">馬上祝福</button>
     </div>
   </div>
+  <CheckIn v-if="showDialog" @close="showDialog = false" />
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import CheckIn from './CheckIn.vue'
+
+const showDialog = ref(false)
+
 const props = defineProps({
   name: String,
   avatarUrl: String,
@@ -23,12 +28,14 @@ const goToBirthdayPage = () => {
 }
 </script>
 
+
 <style scoped lang="scss">
 
 .birthday-hint {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  border: 3px solid $sunset-color;
   background: $secondary-color;;
   box-shadow: 0 0 10px rgba($sunset-color, 0.4);
   border-radius: 1rem;
@@ -46,6 +53,10 @@ const goToBirthdayPage = () => {
   }
 
   .text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     p {
       margin: 0;
       font-weight: 600;

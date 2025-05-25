@@ -1,12 +1,14 @@
 <template>
     <div class="app-header">
         <p>戀與 X 夏以晝</p>
-        <Countdown/>
+        <!-- <Countdown/> -->
+        <Browser/>
     </div>
 </template>
 
 <script setup lang="ts">
-import Countdown from './Countdown.vue';
+// import Countdown from './Countdown.vue';
+import Browser from './Browser.vue';
 
 </script>
 
