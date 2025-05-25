@@ -5,9 +5,10 @@ import Header from './components/Header.vue'
 import Carousel from './components/Carousel.vue'
 import BirthdayHint from './components/BirthdayHint.vue'
 import BirthdayStory from './components/BirthdayStory.vue'
-import BirthdayDialog from './components/BirthdayDialog.vue'
 import LuckyApple from './components/LuckyApple.vue'
 import ClickApples from './components/ClickApples.vue'
+import GetCard from './components/GetCard.vue'
+import GetCard_modified from './components/GetCard_modified.vue'
 
 const imagePaths = [
   '/assets/img/01.jpeg',
@@ -29,7 +30,7 @@ const imagePaths = [
     <!-- 輪播 -->
     <Carousel :image-list="imagePaths" :interval-ms="3000"/>
     <!-- 簽名區 -->
-    <!-- <BirthdayHint name="夏以晝" avatarUrl="/assets/img/avatar.png" link="/birthday"/> -->
+    <BirthdayHint name="夏以晝" avatarUrl="/assets/img/avatar.png" link="/birthday"/>
     <!-- 故事卡 -->
     <BirthdayStory 
       name="夏以晝" 
@@ -44,14 +45,7 @@ const imagePaths = [
     <!-- 幸運蘋果 -->
     <LuckyApple/>
     <!-- 手寫信 -->
-    <!-- <BirthdayDialog
-      :lines="[
-        '今天，是我的生日。',
-        '妳還記得嗎？',
-        '其實，比起收到禮物，\n我更想見到妳。',
-        '謝謝妳，讓這一天，變得不一樣了。'
-      ]"
-    /> -->
+    <GetCard_modified/>
   </div>
   <!-- 頁尾 -->
   <Footer/>

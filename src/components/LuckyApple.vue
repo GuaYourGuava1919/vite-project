@@ -99,7 +99,7 @@ const resetFortune = () => {
 .initial-apple {
   width: 150px;
   cursor: pointer;
-  z-index: 9999;
+  // z-index: 9999;
   animation: appleBounce 1s ease-in-out infinite alternate;
 }
 
@@ -114,7 +114,7 @@ const resetFortune = () => {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   text-align: center;
   animation: fadeIn 0.3s ease-out;
-  z-index: 10000;
+  // z-index: 10000;
   width: 300px;
   .fortune-message {
   font-size: 20px;

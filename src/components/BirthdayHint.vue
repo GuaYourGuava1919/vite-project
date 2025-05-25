@@ -3,7 +3,7 @@
     <!-- <img class="avatar" :src="avatarUrl" alt="角色頭像" /> -->
     <div class="text">
       <p>留下你對<strong>{{ name }}</strong> 的生日生日祝福吧！</p>
-      <button>馬上祝福 🎁</button>
+      <button>馬上祝福</button>
     </div>
   </div>
 </template>
@@ -29,8 +29,7 @@ const goToBirthdayPage = () => {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: $background-color;
-  border: 2px solid $sunset-color;
+  background: $secondary-color;;
   box-shadow: 0 0 10px rgba($sunset-color, 0.4);
   border-radius: 1rem;
   padding: 0.8rem 1rem;
@@ -46,20 +45,11 @@ const goToBirthdayPage = () => {
     transform: scale(1.03);
   }
 
-  .avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 0 5px $navy-color;
-    border: 2px solid white;
-  }
-
   .text {
     p {
       margin: 0;
       font-weight: 600;
-      color: $navy-color;
+      color: #f5f5f5;
     }
 
     button {
