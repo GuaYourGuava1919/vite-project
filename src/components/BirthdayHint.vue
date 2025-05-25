@@ -1,8 +1,8 @@
 <template>
   <div class="birthday-hint" @click="goToBirthdayPage">
-    <img class="avatar" :src="avatarUrl" alt="角色頭像" />
+    <!-- <img class="avatar" :src="avatarUrl" alt="角色頭像" /> -->
     <div class="text">
-      <p>🎂 今天是 <strong>{{ name }}</strong> 的生日！</p>
+      <p>留下你對<strong>{{ name }}</strong> 的生日生日祝福吧！</p>
       <button>馬上祝福 🎁</button>
     </div>
   </div>

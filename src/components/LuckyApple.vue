@@ -2,13 +2,13 @@
   <div class="apple-layer" ref="container">
     <div class="title-container">
       <p class="apple-title">哥哥蘋果咬一口</p>
-      <p class="apple-title">吃掉蘋果，獲得哥哥語錄🍎</p>
+      <p class="apple-title">吃掉蘋果，看看哥哥想說什麼～</p>
     </div>
 
     <!-- 幸運蘋果 -->
     <div v-if="showFortune" class="fortune-container">
       <div class="fortune-message">{{ fortuneMessage }}</div>
-      <button class="fortune-button" @click="resetFortune">再吃一顆 🍎</button>
+      <button class="fortune-button" @click="resetFortune">再吃一顆</button>
     </div>
 
     <!-- 一開始就顯示的蘋果，會逐步吃掉 -->
@@ -35,9 +35,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import appleImgWhole from '/assets/img/apple.png'
-import appleImgHalf from '/assets/img/apple_half.png'
-import appleImgEaten from '/assets/img/apple_eaten.png'
+import appleImgWhole from '/assets/img/oni02.gif'
+import appleImgHalf from '/assets/img/oni03.gif'
+import appleImgEaten from '/assets/img/oni04.gif'
 
 const showFortune = ref(false)
 const fortuneMessage = ref('')
@@ -89,16 +89,17 @@ const resetFortune = () => {
 
 .apple-title {
   font-size: 30px;
-  font-weight: bold;
+  // font-weight: bold;
   text-align: center;
-  color: #f5f5f5;
+  color: #444545;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 0;
 }
 
 .initial-apple {
-  width: 100px;
+  width: 150px;
   cursor: pointer;
+  z-index: 9999;
   animation: appleBounce 1s ease-in-out infinite alternate;
 }
 
@@ -114,24 +115,23 @@ const resetFortune = () => {
   text-align: center;
   animation: fadeIn 0.3s ease-out;
   z-index: 10000;
-  width: 400px;
-}
-
-.fortune-message {
-  font-size: 28px;
+  width: 300px;
+  .fortune-message {
+  font-size: 20px;
   color: $primary-color;
   margin-bottom: 12px;
+  }
+  .fortune-button {
+    background: $background-color;
+    border: none;
+    color: $secondary-color;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+  }
 }
 
-.fortune-button {
-  background: $background-color;
-  border: none;
-  color: $secondary-color;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 20px;
-  cursor: pointer;
-}
 
 @keyframes appleBounce {
   0% {

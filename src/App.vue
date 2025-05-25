@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import  Carousel  from './components/Carousel.vue'
+import Footer from './components/Footer.vue'
+import Header from './components/Header.vue'
+
+import Carousel from './components/Carousel.vue'
 import BirthdayHint from './components/BirthdayHint.vue'
 import BirthdayStory from './components/BirthdayStory.vue'
 import BirthdayDialog from './components/BirthdayDialog.vue'
 import LuckyApple from './components/LuckyApple.vue'
-import Footer from './components/Footer.vue'
 import ClickApples from './components/ClickApples.vue'
 
 const imagePaths = [
@@ -19,14 +21,19 @@ const imagePaths = [
 </script>
 
 <template>
+  <!-- 點擊效果 -->
   <ClickApples />
+  <!-- 頁首 -->
+  <Header/>
   <div class="app">
+    <!-- 輪播 -->
     <Carousel :image-list="imagePaths" :interval-ms="3000"/>
-    <BirthdayHint name="夏以晝" avatarUrl="/assets/img/avatar.png" link="/birthday"/>
+    <!-- 簽名區 -->
+    <!-- <BirthdayHint name="夏以晝" avatarUrl="/assets/img/avatar.png" link="/birthday"/> -->
+    <!-- 故事卡 -->
     <BirthdayStory 
       name="夏以晝" 
       :storyLines="[
-        '今天是夏以晝的生日！',
         '『大概是因為... 追隨溫暖是本能，我也不例外』',
         '『我聽見你說 「現身吧！夏以晝」了』',
       ]" 
@@ -34,16 +41,19 @@ const imagePaths = [
       voiceUrl="/assets/audio/birthday_message.mp3"
       videoUrl="/assets/video/birthday_video.MP4"
       />
-      <LuckyApple/>
-      <BirthdayDialog
+    <!-- 幸運蘋果 -->
+    <LuckyApple/>
+    <!-- 手寫信 -->
+    <!-- <BirthdayDialog
       :lines="[
         '今天，是我的生日。',
         '妳還記得嗎？',
         '其實，比起收到禮物，\n我更想見到妳。',
         '謝謝妳，讓這一天，變得不一樣了。'
       ]"
-    />
+    /> -->
   </div>
+  <!-- 頁尾 -->
   <Footer/>
 </template>
 
@@ -52,7 +62,11 @@ const imagePaths = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  background:linear-gradient(90deg, $primary-color, $secondary-color);
+  // background: linear-gradient(120deg, #f9d4ec, #fcd3b6, #d5f0ff);
+  // background: linear-gradient(150deg, #FFDA78, #FF7F3E, #2A629A);
+  background: linear-gradient(to bottom, #fcd3b6 0%, #FFDA78 80%, #FF7F3E 100%);
+
+
   min-height: 100vh;
 }
 
