@@ -1,10 +1,13 @@
 <template>
   <div class="wrapper">
+    <!-- 導航麵包屑 -->
+    <button class="breadcrumb">
+      <div class="marquee">
+        <div class="marquee-text"><img src="/assets/img/sunplane.png" alt="breadcrumb-icon" class="breadcrumb-icon" />夏以晝・生日快樂！</div>
+      </div>
+    </button>
 
-    <div class="breadcrumb">
-      <img src="/assets/img/sunplane.png" alt="breadcrumb-icon" class="breadcrumb-icon" />
-      <div class="breadcrumb-item" @click="router.push('/')">回首頁</div>
-    </div>
+
     <!-- 標題區 -->
     <div class="title">
       <p>哥哥就是應該保護妹妹的</p>
@@ -57,10 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
+import { ref } from 'vue'
 
 const imagePaths = [
   '/assets/img/14.PNG',
@@ -78,7 +78,7 @@ const cycleCarousel = () => {
   nextIndex.value = (activeIndex.value + 1) % imagePaths.length
 }
 
-setInterval(cycleCarousel, 3000)
+setInterval(cycleCarousel, 2000)
 
 const character = {
   name: '夏以畫',
@@ -102,21 +102,9 @@ const playVideo = (v: string) => {
   audioRef.value?.play()
 }
 
-onMounted(() => {
-  audioRef.value?.addEventListener('ended', () => {
-    setTimeout(() => router.push('/blessing'), 1500)
-  })
 
-  document.addEventListener('click', (e) => {
-    const magic = document.createElement('div')
-    magic.className = 'magic-spark'
-    magic.style.left = `${e.clientX - 15}px`
-    magic.style.top = `${e.clientY - 15}px`
-    document.getElementById('magic-effect-container')?.appendChild(magic)
-    setTimeout(() => magic.remove(), 1000)
-  })
-})
 </script>
+
 
 
 <style scoped lang="scss">
@@ -126,26 +114,6 @@ onMounted(() => {
   padding: 2rem 1rem;
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
-}
-
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  font-size: 1.2rem;
-  color: $secondary-color;
-  cursor: pointer;
-  img{
-    width: 60px;
-  }
-  .breadcrumb-item {
-    margin-right: 0.5rem;
-    font-size: 30px;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 }
 
 .title {
@@ -286,22 +254,46 @@ onMounted(() => {
   }
 }
 
-#magic-effect-container {
-  position: fixed;
-  top: 0;
-  left: 0;
+.breadcrumb {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  background: linear-gradient(to right, #003285, #2A629A);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 30px;
   width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
+  margin-bottom: 40px;
 }
-.magic-spark {
+
+.marquee {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  img{
+    width: 50px;
+    margin-right: 10px;
+  }
+}
+
+.marquee-text {
+  display: inline-block;
+  white-space: nowrap;
   position: absolute;
-  width: 30px;
-  height: 30px;
-  background: url('https://emojiapi.dev/api/v1/sparkles/128.png') no-repeat center/contain;
-  animation: pop-out 1s ease-out forwards;
-  pointer-events: none;
+  font-size: 2rem;
+  animation: marquee 8s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
 }
 
 @keyframes pop-out {

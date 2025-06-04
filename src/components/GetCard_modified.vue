@@ -17,7 +17,7 @@
         <!-- <div v-if="isRare" class="rare-text">稀有卡！</div> -->
       </div>
       <div v-else>
-        <p>按一下來抽卡吧！</p>
+        <p style="color: aliceblue;">按一下來抽卡吧！</p>
       </div>
     </div>
 
@@ -157,7 +157,9 @@ function hideCongrats() {
   margin: 0 auto 20px;
   border: 2px solid #ccc;
   border-radius: 12px;
-  background-color: #f5f5f5;
+  // background-color: #f5f5f5;
+  background: url('/assets/img/appletree.jpg') no-repeat center center;
+  background-size: cover;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   display: flex;
