@@ -7,7 +7,7 @@ const routes = [
     component: () => import('../views/HomeView.vue')
   },
   {
-    path: '/special/:code',
+    path: '/special',
     component: () => import('../views/SpecialView.vue')
   },
 //   {

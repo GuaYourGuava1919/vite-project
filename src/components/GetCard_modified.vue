@@ -1,6 +1,6 @@
 <template>
   <div class="gacha-container">
-    <h2>遊戲抽不到沒關係，來這裡抽XD<br/>（記得開聲音，有驚喜！）</h2>
+    <p>遊戲抽不到沒關係，來這裡抽XD<br/>（記得開聲音，有驚喜！）</p>
     <img class="corner-deco" src="/assets/img/oni05.gif" alt="裝飾圖" />
 
     <div
@@ -130,7 +130,7 @@ function hideCongrats() {
   text-align: center;
   padding: 20px;
 
-  h2 {
+  p {
     font-size: 1.5rem;
     color: #444545;
     margin-bottom: 20px;

@@ -3,35 +3,23 @@
         <!-- 輪播 -->
         <Carousel :image-list="imagePaths" :interval-ms="3000"/>
         <!-- 簽名區 -->
-        <BirthdayHint name="夏以晝" avatarUrl="/assets/img/avatar.png" link="/birthday"/>
         <!-- 介紹 -->
         <Intro/>
-        <!-- 故事卡 -->
-        <!-- <BirthdayStory 
-        name="夏以晝" 
-        :storyLines="[
-            '『大概是因為... 追隨溫暖是本能，我也不例外』',
-            '『我聽見你說 「現身吧！夏以晝」了』',
-        ]" 
-        storyImage="/assets/img/avatar.png" 
-        voiceUrl="/assets/audio/birthday_message.mp3"
-        videoUrl="/assets/video/birthday_video.MP4"
-        /> -->
         <!-- 幸運蘋果 -->
         <LuckyApple/>
         <!-- 手寫信 -->
         <GetCard_modified/>
+        <!-- 前往樂園 -->
+        <GotoRakuen/>
   </div>
 </template>
 
 <script setup lang="ts">
-
-
-import Carousel from '../components/Carousel.vue'
-import BirthdayHint from '../components/BirthdayHint.vue'
-import LuckyApple from '../components/LuckyApple.vue'
-import GetCard_modified from '../components/GetCard_modified.vue'
 import Intro from '../components/Intro.vue'
+import Carousel from '../components/Carousel.vue'
+import LuckyApple from '../components/LuckyApple.vue'
+import GotoRakuen from '../components/GotoRakuen.vue'
+import GetCard_modified from '../components/GetCard_modified.vue'
 
 const imagePaths = [
   '/assets/img/01.jpeg',

@@ -1,42 +1,58 @@
 <template>
   <div class="wrapper">
-    <!-- 背景音樂 -->
-    <audio src="/assets/audio/bgm.mp3" autoplay loop />
 
-    <!-- 開場卡片 -->
-    <div class="intro-card">
-      <div class="top-note">
-        歡迎來到特別來賓的魔法祝福空間
-      </div>
-      <div class="base-info">
-        <h1 class="character-name">讓哥哥跳舞給你看XD</h1>
-        <!-- <img :src="character.image" alt="角色圖片" class="avatar" /> -->
-      </div>
+    <div class="breadcrumb">
+      <img src="/assets/img/sunplane.png" alt="breadcrumb-icon" class="breadcrumb-icon" />
+      <div class="breadcrumb-item" @click="router.push('/')">回首頁</div>
+    </div>
+    <!-- 標題區 -->
+    <div class="title">
+      <p>哥哥就是應該保護妹妹的</p>
+      <img src="/assets/img/oni06.gif" alt="title-image" class="title-image" />
     </div>
 
-    <!-- 影片播放 -->
-    <video
-      ref="videoRef"
-      class="video-player"
-      :src="character.video"
-      autoplay
-      muted
-      playsinline
-      loop
-    ></video>
+    <!-- 長輩圖區塊 -->
+    <section class="carousel-section">
+      <div class="custom-carousel">
+        <div
+          class="carousel-slide"
+          v-for="(img, index) in imagePaths"
+          :key="index"
+          :class="{ active: index === activeIndex, left: index === prevIndex, right: index === nextIndex }"
+        >
+          <img :src="img" alt="carousel-image" />
+        </div>
+      </div>
+    </section>
 
-    <!-- 播放語音 -->
-    <button @click="playAudio" class="play-audio-btn">
-      ✨ 開啟生日魔法 ✨
-    </button>
-    <button @click="playAudio" class="play-audio-btn">
-      ✨ 黑魔法詠唱 ✨
-    </button>
+    <!-- 哥哥影片區塊 -->
+    <section class="video-section">
+      <h2>🎥 載"哥"載舞</h2>
+      <video
+        ref="videoRef"
+        class="video-player"
+        :src="currentVideo"
+        autoplay
+        playsinline
+        loop
+        :muted="false"
+        controls
+      ></video>
 
-    <audio ref="audioRef" :src="character.audio" />
+      <!-- 魔法按鈕群（四格） -->
+      <div class="button-grid">
+        <div class="grid-hint">
+          <!-- <p>點點看！</p> -->
+        </div>
+        <button @click="playVideo(character.video)" class="play-audio-btn pink">哥之舞動🕺</button>
+        <button @click="playVideo(character.darkVideo)" class="play-audio-btn black">黑魔法詠唱🧙🏼‍♂️</button>
+        <button @click="playVideo(character.activateVideo)" class="play-audio-btn purple">喚醒哥哥💋</button>
+        <button @click="playVideo(character.puppyVideo)" class="play-audio-btn orange">誰是小狗？🐕</button>
+      </div>
+    </section>
 
-    <!-- 櫻花動畫容器 -->
-    <div id="sakura-container"></div>
+    <!-- 點擊魔法效果 -->
+    <div id="magic-effect-container"></div>
   </div>
 </template>
 
@@ -46,306 +62,256 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+const imagePaths = [
+  '/assets/img/14.PNG',
+  '/assets/img/15.PNG',
+  '/assets/img/16.PNG',
+]
+
+const activeIndex = ref(0)
+const prevIndex = ref(imagePaths.length - 1)
+const nextIndex = ref(1)
+
+const cycleCarousel = () => {
+  activeIndex.value = (activeIndex.value + 1) % imagePaths.length
+  prevIndex.value = (activeIndex.value - 1 + imagePaths.length) % imagePaths.length
+  nextIndex.value = (activeIndex.value + 1) % imagePaths.length
+}
+
+setInterval(cycleCarousel, 3000)
+
 const character = {
   name: '夏以畫',
-  image: '/assets/img/pic.jpg',
   video: '/assets/video/birthday_video.MP4',
+  darkVideo: '/assets/video/dark_magic.MOV',
+  activateVideo: '/assets/video/activate_me.MOV',
+  puppyVideo: '/assets/video/puppy.MOV',
   audio: '/assets/audio/birthday_message.mp3'
 }
 
+const currentVideo = ref(character.video)
 const videoRef = ref<HTMLVideoElement | null>(null)
 const audioRef = ref<HTMLAudioElement | null>(null)
 
-const playAudio = () => {
+const playVideo = (v: string) => {
+  currentVideo.value = v
+  if (videoRef.value) {
+    videoRef.value.muted = false
+    videoRef.value.play()
+  }
   audioRef.value?.play()
 }
 
 onMounted(() => {
-  // 語音播放完跳轉
   audioRef.value?.addEventListener('ended', () => {
-    setTimeout(() => {
-      router.push('/blessing')
-    }, 1500)
+    setTimeout(() => router.push('/blessing'), 1500)
   })
 
-  // 櫻花動畫生成
-  const sakuraContainer = document.getElementById('sakura-container')
-  const createPetal = () => {
-    const petal = document.createElement('div')
-    petal.className = 'sakura-petal'
-    petal.style.left = `${Math.random() * 100}vw`
-    petal.style.animationDuration = `${5 + Math.random() * 5}s`
-    sakuraContainer?.appendChild(petal)
-    setTimeout(() => petal.remove(), 10000)
-  }
-  setInterval(createPetal, 300)
-
-  // 點擊爆炸心型粒子
   document.addEventListener('click', (e) => {
-    const heart = document.createElement('div')
-    heart.className = 'magic-heart'
-    heart.style.left = `${e.clientX}px`
-    heart.style.top = `${e.clientY}px`
-    document.body.appendChild(heart)
-    setTimeout(() => heart.remove(), 1000)
+    const magic = document.createElement('div')
+    magic.className = 'magic-spark'
+    magic.style.left = `${e.clientX - 15}px`
+    magic.style.top = `${e.clientY - 15}px`
+    document.getElementById('magic-effect-container')?.appendChild(magic)
+    setTimeout(() => magic.remove(), 1000)
   })
 })
 </script>
 
+
 <style scoped lang="scss">
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-@keyframes spin {
-  0% {
-    transform: rotate(0deg) scale(1.1);
-  }
-  100% {
-    transform: rotate(360deg) scale(1.1);
-  }
-}
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 12px #fcd1e6;
-  }
-  50% {
-    box-shadow: 0 0 24px #ffd6eb;
-  }
-}
-@keyframes popIn {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes fall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-@keyframes pop {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(3);
-    opacity: 0;
-  }
-}
-
-/* 基礎背景 */
 .wrapper {
-  background: linear-gradient(100deg, #fde2f3cc, #e4d0f0cc, #d3e0ffcc);
-  background-size: 200% 200%;
-  animation: gradientFlow 10s ease infinite;
-  backdrop-filter: blur(6px);
+  background: linear-gradient(to bottom, #fff4e6, #ffd6b8);
+  min-height: 100vh;
   padding: 2rem 1rem;
-  max-width: 600px;
-  margin: 0 auto;
+  font-family: 'Segoe UI', sans-serif;
   text-align: center;
-  font-family: "Segoe UI", sans-serif;
-  position: relative;
-  z-index: 10;
 }
 
-/* 卡片區 */
-.intro-card {
-  // background: rgba(255, 255, 255, 0.25);
-  background: url('/assets/img/pic.jpg') no-repeat center/cover;
-  border-radius: 20px;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 1.5rem 1rem;
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 2rem;
-  box-shadow: 0 8px 20px rgba(255, 192, 203, 0.3);
-  animation: popIn 1s ease-out;
-  animation: float 4s ease-in-out infinite;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* 標題浮動 */
-.top-note {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: $secondary-color;
-  margin-bottom: 1rem;
-  animation: float 4s ease-in-out infinite;
-  text-shadow: 0 2px 4px rgba(255, 182, 193, 0.5);
+  cursor: pointer;
+  img{
+    width: 60px;
+  }
+  .breadcrumb-item {
+    margin-right: 0.5rem;
+    font-size: 30px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
-/* 名稱與頭像 */
-.base-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: float 4s ease-in-out infinite;
-}
-.character-name {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #f472b6;
-  margin-bottom: 0.5rem;
-}
-
-/* 魔法頭像 */
-.avatar {
-  width: 500px;
-  height: 500px;
-  // border-radius: 50%;
-  border: 4px solid #f9dbe3;
-  box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3);
-  margin-bottom: 1rem;
-  object-fit: cover;
-  position: relative;
-  z-index: 5;
-  animation: glow 6s ease-in-out infinite;
-}
-.avatar::after {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: -6px;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 2px dashed #ffd6eb;
-  animation: spin 10s linear infinite;
-  box-shadow: 0 0 8px #ffd6eb;
-  z-index: -1;
+.title {
+  p {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #fb923c;
+    text-shadow: 1px 1px 2px #fff;
+  }
+  .title-image {
+    max-width: 160px;
+    margin-top: 0.5rem;
+  }
 }
 
-/* 影片區 */
+.carousel-section {
+  margin-top: 2rem;
+  .custom-carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+  }
+  .carousel-slide {
+    position: absolute;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    width: 280px;
+    padding: 10px;
+    img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    &.active {
+      transform: translateX(0) scale(1.1) rotateY(0);
+      z-index: 3;
+    }
+    &.left {
+      transform: translateX(-220px) rotateY(45deg) scale(0.9);
+      z-index: 2;
+    }
+    &.right {
+      transform: translateX(220px) rotateY(-45deg) scale(0.9);
+      z-index: 2;
+    }
+  }
+}
+
+.video-section {
+  margin-top: 2rem;
+  h2 {
+    font-size: 2.5rem;
+    color: #f97316;
+    margin-bottom: 1rem;
+  }
+}
+
 .video-player {
-  width: 90%;
+  width: 100%;
   max-width: 480px;
-  border-radius: 12px;
-  border: 2px solid #f9dbe3;
-  box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3);
+  border-radius: 16px;
+  border: 3px solid #ffd1dc;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   margin: 1rem auto;
-  display: block;
 }
 
-/* 播放按鈕 */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+}
+
+.grid-hint {
+  grid-column: span 2;
+  margin-bottom: -0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f97316;
+}
+
 .play-audio-btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
-  margin: 1rem auto;
-  display: block;
-  font-size: 1rem;
-  font-weight: 500;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease;
-  color: white;
-  width: fit-content;
-  min-width: 200px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  width: 150px;
+  height: 150px;
+  // border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+  &:hover {
+    transform: scale(1.05);
+    // box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  }
 }
 
-/* 第一顆：生日魔法（粉紅） */
-.play-audio-btn:nth-of-type(1) {
+.pink {
   background-color: #f472b6;
-}
-.play-audio-btn:nth-of-type(1):hover {
-  background-color: #ec4899;
-}
-
-/* 第二顆：黑魔法（紫） */
-.play-audio-btn:nth-of-type(2) {
-  background-color: #8b5cf6;
-}
-.play-audio-btn:nth-of-type(2):hover {
-  background-color: #7c3aed;
-}
-
-@keyframes neonGlow {
-  0% {
-    text-shadow: 0 0 8px #ffc0cb, 0 0 12px #f9c2d5;
+  color: white;
+  box-shadow: 6px 4px 2px #ff0084;
+  &:active {
+    background-color: #ff0084;
+    box-shadow: 6px 4px 2px #f472b6;
   }
-  100% {
-    text-shadow: 0 0 12px #fcd1e6, 0 0 20px #ffd6eb;
+}
+.black {
+  background-color: #000000;
+  color: #d438ff;
+  box-shadow: 6px 4px 2px #6d6d6d;
+  &:active {
+    background-color: #6d6d6d;
+    box-shadow: 6px 4px 2px #000000;
   }
 }
 
-.top-note,
-.character-name {
-  animation: neonGlow 2s ease-in-out infinite alternate;
-}
-
-
-/* RWD */
-@media (max-width: 600px) {
-  .avatar {
-    width: 96px;
-    height: 96px;
-  }
-  .character-name {
-    font-size: 1.5rem;
-  }
-  .play-audio-btn {
-    width: 100%;
-    font-size: 1rem;
+.purple {
+  background-color: $secondary-color;
+  color: white;
+  box-shadow: 6px 4px 2px #0066ff;
+  &:active {
+    background-color: #4c00ff;
+    box-shadow: 6px 4px 2px $secondary-color;
   }
 }
+.orange {
+  background-color: $primary-color;
+  box-shadow: 6px 4px 2px #ffc343;
+  color: white;
+  &:active {
+    background-color: #ff7300;
+    box-shadow: 6px 4px 2px $primary-color;;
+  }
+}
 
-/* 櫻花動畫 */
-#sakura-container {
+#magic-effect-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 9999;
 }
-.sakura-petal {
+.magic-spark {
   position: absolute;
-  top: -2rem;
-  width: 20px;
-  height: 20px;
-  background: url('/assets/img/sakura.png') no-repeat center/contain;
-  opacity: 0.8;
-  animation: fall linear infinite;
-}
-
-/* 點擊魔法心型 */
-.magic-heart {
-  position: fixed;
   width: 30px;
   height: 30px;
-  background: url('https://emojiapi.dev/api/v1/heart_decoration/128.png') no-repeat center/contain;
-  animation: pop 1s ease-out forwards;
+  background: url('https://emojiapi.dev/api/v1/sparkles/128.png') no-repeat center/contain;
+  animation: pop-out 1s ease-out forwards;
   pointer-events: none;
-  z-index: 9999;
+}
+
+@keyframes pop-out {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 </style>
